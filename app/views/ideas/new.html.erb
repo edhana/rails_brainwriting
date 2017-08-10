@@ -1,0 +1,20 @@
+<% if @parent.nil? %>
+  <h3>New Board</h3>
+<% else %>
+  <h3>Board <%= @parent.description %>. <small>New idea:</small></h3>
+<% end %>
+
+<%= form_for :idea, url: ideas_path do |f| %>
+  <p>
+    <%= f.label :description %>
+    <%= f.text_field(:description) %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<section id="child-ideas" class="container content-section text-center">
+  <strong>Board Ideas</strong>
+</section>
