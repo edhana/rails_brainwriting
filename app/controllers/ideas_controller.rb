@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   def index
-    @ideas = Idea.order(updated_at: :desc)
+    @ideas = Idea.order(updated_at: :desc).limit(8)
   end
 
   def create
@@ -19,6 +19,22 @@ class IdeasController < ApplicationController
 
   def show
     @idea = Idea.find(params[:id])
+  end
+
+  def newboard
+    raise ArgumentError.new('No board name was given') unless params[:name]
+
+    boardname = params[:name]
+    @idea = Idea.find_by_description boardname
+
+    unless @idea.nil?
+      redirect_to @idea if @idea
+    end
+
+    @idea = Idea.new
+    @idea.description = boardname
+    @idea.save
+    render 'new'
   end
 
   private
