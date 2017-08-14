@@ -1,0 +1,8 @@
+<h3>
+  Thinking about <%= @idea.description %>
+  <small>
+    <%= link_to new_child_path(@idea) do %>
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <% end %>
+  </small>
+</h3>

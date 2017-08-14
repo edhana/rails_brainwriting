@@ -6,6 +6,10 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save
+      if @parent.nil?
+        @parent = @idea
+      end
+
       redirect_to  @idea
     else
       render 'new'
