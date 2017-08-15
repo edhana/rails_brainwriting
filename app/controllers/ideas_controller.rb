@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   def index
-    @ideas = Idea.order(updated_at: :desc).limit(8)
+    @ideas = Idea.where(parent_id: nil).order(updated_at: :desc).limit(8)
   end
 
   def create
