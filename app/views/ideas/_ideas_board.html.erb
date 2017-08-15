@@ -1,3 +1,7 @@
+<% if @idea.children.empty? %>
+  <h5>No ideas added to this board</h5>
+<% else %>
+  <!-- TODO: This shall be transformed in a react component -->
 <!-- Dinamic page content -->
 <div class="container">
   <!-- Projects Row -->
@@ -49,3 +53,5 @@
   </div>
   <!-- /.row -->
 </div>
+<% end %>
+

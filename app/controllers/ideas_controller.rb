@@ -5,12 +5,13 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
-    if @idea.save
-      if @parent.nil?
-        @parent = @idea
-      end
 
-      redirect_to  @idea
+    if @idea.save!
+      if @idea.parent.nil?
+        redirect_to @idea
+      else
+        redirect_to @idea.parent
+      end
     else
       render 'new'
     end
@@ -26,24 +27,26 @@ class IdeasController < ApplicationController
   end
 
   def newboard
-    raise ArgumentError.new('No board name was given') unless params[:name]
+    # TODO: Add security validation (via regex of the name parameter)
 
-    boardname = params[:name]
+    boardname = newboard_name_params
     @idea = Idea.find_by_description boardname
 
-    unless @idea.nil?
-      redirect_to @idea if @idea
+    if @idea.nil?
+      @idea = Idea.create(:description => boardname)
     end
 
-    @idea = Idea.new
-    @idea.description = boardname
-    @idea.save
-    render 'new'
+    # redirect_to @idea
+    render :show
   end
 
   private
   def idea_params
-    params.require(:idea).permit(:description)
+    params.require(:idea).permit(:parent_id, :description)
+  end
+
+  def newboard_name_params
+    params.require(:name)
   end
 end
 

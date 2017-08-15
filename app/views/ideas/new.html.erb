@@ -1,4 +1,4 @@
-<%= form_for :idea, url: ideas_path do |f| %>
+<%= form_for :idea, url: ideas_path(@parent) do |f| %>
   <p>
     <%= f.label :add_new_idea %>
     <%= f.text_field(:description) %>

@@ -40,6 +40,7 @@ group :development, :test do
   gem 'pry-rails', '~> 0.3.6'
   gem 'guard-rails', '~> 0.8.0'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
 end
 
 group :development do
