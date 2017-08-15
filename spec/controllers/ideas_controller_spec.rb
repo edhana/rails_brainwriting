@@ -39,7 +39,7 @@ RSpec.describe IdeasController, type: :controller do
       expect{
         get :newboard, {:params => {:name => "Teste 1"}}
       }.to change(Idea, :count).by(1)
-      expect(response).to render_template(:show)
+      expect(response).to render_template(:newboard)
     end
 
     # it "doesn't create a board with invalid name parameter" do

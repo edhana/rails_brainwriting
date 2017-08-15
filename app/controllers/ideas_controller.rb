@@ -51,12 +51,20 @@ class IdeasController < ApplicationController
   end
 
   def newboard_name_params
-    params.require(:name)
+    sanitize_boardname(params.require(:name))
   end
 
   def load_parent_board(parent_id)
     @idea = Idea.new(:parent_id => parent_id)
     @parent = @idea.parent
+  end
+
+  # code taken from: http://edgeguides.rubyonrails.org/security.html (item 4.2)
+  def sanitize_boardname(boardname)
+    boardname.strip.tap do |name|
+      # get only the boardname, remote attempts to inject path
+      name.sub! /\A.*(\\|\/)/, ''
+    end
   end
 end
 

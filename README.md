@@ -1,24 +1,6 @@
-# README
+# Master Mind Brainwriting
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The objective of this app is to create a simple service where users can register and share their Brainwriting sessions. 
 
-Things you may want to cover:
+Just write your ideas and share them with your peers
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
