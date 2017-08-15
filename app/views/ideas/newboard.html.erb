@@ -1,12 +1,2 @@
-<h1>Create a New Board</h1>
-<%= form_for :idea, url: ideas_path do |f| %>
-  <p>
-    <%= f.label :description %>
-    <%= f.text_field(:description) %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<%= render "ideas_board" %>
 

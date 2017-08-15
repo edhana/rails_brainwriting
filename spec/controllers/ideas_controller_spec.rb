@@ -10,14 +10,20 @@ RSpec.describe IdeasController, type: :controller do
     expect(assigns(:ideas)).to eq([@parent_idea])
   end
 
-  describe "New Idea" do
-    it "POST create" do
+  it "GET new" do
+    get :new
+    expect(response).to render_template(:new)
+    expect(response.status).to eq(200)
+  end
+
+  describe "POST create" do
+    it "new parent Idea" do
       expect{
         post :create, :params => {:idea => Idea.new(:description => 'New parent idea').as_json}
       }.to change(Idea, :count).by(1)
     end
 
-    it "POST create child" do
+    it "new child Idea" do
       idea = Idea.new(:parent_id => @parent_idea.id, :description => "Child idea")
       expect{
         post :create, :params => {:idea => idea.as_json}
@@ -28,8 +34,8 @@ RSpec.describe IdeasController, type: :controller do
     end
   end
 
-  describe "New board" do
-    it "create new board with direct GET param" do
+  describe "GET newboard" do
+    it "create board" do
       expect{
         get :newboard, {:params => {:name => "Teste 1"}}
       }.to change(Idea, :count).by(1)

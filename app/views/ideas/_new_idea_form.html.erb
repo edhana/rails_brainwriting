@@ -1,0 +1,8 @@
+<%= form_for :idea, url: ideas_path do |f| %>
+  <p>
+    <%= f.label :add_new_idea %>
+    <%= f.hidden_field(:parent_id, :value => @idea.parent.id) unless @idea.parent.nil?%>
+    <%= f.text_field(:description) %>
+    <%= f.submit 'Save' %>
+  </p>
+<% end %>

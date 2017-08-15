@@ -18,26 +18,31 @@ class IdeasController < ApplicationController
   end
 
   def new
-    @parent = Idea.find(params[:parent_id]) if not params[:parent_id].nil?
-    @idea = Idea.new
+    if params[:parent_id].nil?
+      @idea = Idea.new
+    else
+      load_parent_board(params[:parent_id])
+    end
   end
 
   def show
-    @idea = Idea.find(params[:id])
+    load_parent_board(params[:id])
   end
 
   def newboard
     # TODO: Add security validation (via regex of the name parameter)
 
-    boardname = newboard_name_params
-    @idea = Idea.find_by_description boardname
+    board = Idea.find_by_description(newboard_name_params)
+    @idea = Idea.new
 
-    if @idea.nil?
-      @idea = Idea.create(:description => boardname)
+    if board.nil?
+      newidea = Idea.create(:description => newboard_name_params)
+      @idea.parent = newidea
     end
 
     # redirect_to @idea
-    render :show
+    load_parent_board(@idea.parent.id)
+    render 'newboard'
   end
 
   private
@@ -47,6 +52,11 @@ class IdeasController < ApplicationController
 
   def newboard_name_params
     params.require(:name)
+  end
+
+  def load_parent_board(parent_id)
+    @idea = Idea.new(:parent_id => parent_id)
+    @parent = @idea.parent
   end
 end
 

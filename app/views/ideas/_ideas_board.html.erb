@@ -1,4 +1,12 @@
-<% if @idea.children.empty? %>
+<%= render "new_idea_form" %>
+
+<% if not @parent.nil? %>
+  <h3>Thinking about <%= @idea.parent.description %></h3>
+<% end %>
+
+<% if @parent.nil? %>
+  * Create a new board for your ideas
+<% elsif @parent.children.empty? %>
   <h5>No ideas added to this board</h5>
 <% else %>
   <!-- TODO: This shall be transformed in a react component -->

@@ -7,7 +7,7 @@
       <strong><%= "#{i.description}"%></strong> - Last Updated: <%= i.updated_at.strftime(" %m/%d/%Y at %I:%M %p") %>
     <% end %>
     &nbsp;|&nbsp;
-    <%= link_to new_idea_path(:parent_id => i) do %>
+    <%= link_to new_child_path(i) do %>
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       <% end %>
     <%= link_to new_idea_path do %>
